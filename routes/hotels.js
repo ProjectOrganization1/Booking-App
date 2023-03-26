@@ -14,6 +14,7 @@ router.post("/", async (req,res)=>{
         res.status(500).json(err)
     }
 });
+
 //UPDATE
 router.put("/:id", async (req,res)=>{
     try{
@@ -27,6 +28,7 @@ router.put("/:id", async (req,res)=>{
         res.status(500).json(err)
     }
 });
+
 //DELETE
 router.delete("/:id", async (req,res)=>{
     try{
@@ -38,6 +40,7 @@ router.delete("/:id", async (req,res)=>{
         res.status(500).json(err)
     }
 });
+
 //GET
 router.get("/:id", async (req,res)=>{
     try{
@@ -49,8 +52,13 @@ router.get("/:id", async (req,res)=>{
         res.status(500).json(err)
     }
 });
+
 //GET ALL
 router.get("/", async (req,res)=>{
+
+    const failed = true;
+    if (failed) return next(createError(401, "You are not authenticated!"));
+
     try{
         const hotels = await Hotel.find(
             req.params.id
@@ -58,6 +66,7 @@ router.get("/", async (req,res)=>{
         res.status(200).json(hotels)
     }catch(err){
         res.status(500).json(err)
+        next(err)
     }
 });
 

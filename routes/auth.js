@@ -9,5 +9,4 @@ router.get("/register", (req, res)=>{
     res.send("Hello, this is authendpoint")
 })
 
-
 export default router
